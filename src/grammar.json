@@ -2812,28 +2812,32 @@
       "value": "+"
     },
     "cast_expr": {
-      "type": "PREC_RIGHT",
-      "value": 12,
+      "type": "PREC_DYNAMIC",
+      "value": 1,
       "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "FIELD",
-            "name": "type",
-            "content": {
-              "type": "SYMBOL",
-              "name": "_paren_ident"
+        "type": "PREC_RIGHT",
+        "value": 12,
+        "content": {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_paren_ident"
+              }
+            },
+            {
+              "type": "FIELD",
+              "name": "value",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_expr"
+              }
             }
-          },
-          {
-            "type": "FIELD",
-            "name": "value",
-            "content": {
-              "type": "SYMBOL",
-              "name": "_expr"
-            }
-          }
-        ]
+          ]
+        }
       }
     },
     "member_access_expr": {
@@ -2869,32 +2873,31 @@
           }
         },
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "PREC_LEFT",
-            "value": 13,
-            "content": {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "FIELD",
-                  "name": "accessor",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "_expr"
-                  }
-                },
-                {
-                  "type": "STRING",
-                  "value": "."
-                }
-              ]
-            }
-          },
-          "named": true,
-          "value": "member_access_expr"
+          "type": "SYMBOL",
+          "name": "incomplete_member_access_expr"
         }
       ]
+    },
+    "incomplete_member_access_expr": {
+      "type": "PREC_LEFT",
+      "value": 13,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "FIELD",
+            "name": "accessor",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_expr"
+            }
+          },
+          {
+            "type": "STRING",
+            "value": "."
+          }
+        ]
+      }
     },
     "func_call_expr": {
       "type": "PREC_LEFT",
