@@ -663,11 +663,22 @@ module.exports = grammar({
     )),
 
 
-    member_access_expr: $ => prec.left(PREC.MEMBER, seq(
-      field('accessor', $._expr),
-      '.',
-      field('member', $.ident)
-    )),
+    member_access_expr: $ => choice(
+      prec.left(PREC.MEMBER, seq(
+        field('accessor', $._expr),
+        '.',
+        field('member', $.ident)
+      )),
+      // Error-recovery: dot with no following identifier. Produces a valid node
+      // so tree-sitter can close enclosing blocks instead of cascading to ERROR.
+      alias(
+        prec.left(PREC.MEMBER, seq(
+          field('accessor', $._expr),
+          '.',
+        )),
+        $.member_access_expr
+      ),
+    ),
 
     func_call_expr: $ => prec.left(PREC.CALL, seq(
       field('func', $._expr),
