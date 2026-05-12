@@ -1,11 +1,11 @@
 [package]
 name = "tree-sitter-witcherscript"
 description = "WitcherScript grammar for the tree-sitter parsing library"
-version = "0.13.0"
+version = "0.14.0"
 readme = "README.md"
 keywords = ["incremental", "parsing", "tree-sitter", "witcherscript"]
 categories = ["parsing", "text-editors"]
-repository = "https://github.com/tree-sitter/tree-sitter-witcherscript"
+repository = "https://github.com/webspam/tree-sitter-witcherscript"
 edition = "2018"
 license = "MIT"
 autoexamples = false

@@ -1,4 +1,4 @@
-module github.com/tree-sitter/tree-sitter-witcherscript
+module github.com/webspam/tree-sitter-witcherscript
 
 go 1.22
 
