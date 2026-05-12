@@ -657,10 +657,10 @@ module.exports = grammar({
     unary_op_plus: $ => '+',
 
 
-    cast_expr: $ => prec.right(PREC.CAST, seq(
+    cast_expr: $ => prec.dynamic(1, prec.right(PREC.CAST, seq(
       field('type', $._paren_ident),
       field('value', $._expr),
-    )),
+    ))),
 
 
     member_access_expr: $ => choice(
