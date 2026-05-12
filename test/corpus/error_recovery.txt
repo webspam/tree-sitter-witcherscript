@@ -1,0 +1,43 @@
+===================================================================================================
+Incomplete member access - trailing dot before semicolon
+===================================================================================================
+
+function test() {
+    x = super.;
+}
+
+---------------------------------------------------------------------------------------------------
+
+(script
+  (func_decl
+    name: (ident)
+    params: (func_params)
+    definition: (func_block
+      (expr_stmt
+        (assign_op_expr
+          left: (ident)
+          op: (assign_op_direct)
+          right: (member_access_expr
+            (incomplete_member_access_expr
+              accessor: (super_expr))))))))
+
+
+===================================================================================================
+Incomplete member access - trailing dot at end of line
+===================================================================================================
+
+function test() {
+    obj.
+}
+
+---------------------------------------------------------------------------------------------------
+
+(script
+  (func_decl
+    name: (ident)
+    params: (func_params)
+    definition: (func_block
+      (ERROR
+        (member_access_expr
+          (incomplete_member_access_expr
+            accessor: (ident)))))))

@@ -669,16 +669,17 @@ module.exports = grammar({
         '.',
         field('member', $.ident)
       )),
-      // Error-recovery: dot with no following identifier. Produces a valid node
-      // so tree-sitter can close enclosing blocks instead of cascading to ERROR.
-      alias(
-        prec.left(PREC.MEMBER, seq(
-          field('accessor', $._expr),
-          '.',
-        )),
-        $.member_access_expr
-      ),
+      // Error-recovery: dot with no following identifier. Uses a distinct node
+      // name so downstream tools can identify and flag incomplete member access,
+      // while still allowing tree-sitter to close enclosing blocks rather than
+      // cascading to a block-level ERROR.
+      $.incomplete_member_access_expr,
     ),
+
+    incomplete_member_access_expr: $ => prec.left(PREC.MEMBER, seq(
+      field('accessor', $._expr),
+      '.',
+    )),
 
     func_call_expr: $ => prec.left(PREC.CALL, seq(
       field('func', $._expr),

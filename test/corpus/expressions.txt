@@ -403,6 +403,42 @@ function test() {
 
 
 ===================================================================================================
+Cast expression disambiguation
+===================================================================================================
+
+function test() {
+    (MyType)expr;
+    (MyType)(nested);
+    (MyType)(obj).Method();
+}
+
+---------------------------------------------------------------------------------------------------
+
+(script
+  (func_decl
+    name: (ident)
+    params: (func_params)
+    definition: (func_block
+      (expr_stmt
+        (cast_expr
+          type: (ident)
+          value: (ident)))
+      (expr_stmt
+        (cast_expr
+          type: (ident)
+          value: (nested_expr
+            (ident))))
+      (expr_stmt
+        (cast_expr
+          type: (ident)
+          value: (func_call_expr
+            func: (member_access_expr
+              accessor: (nested_expr
+                (ident))
+              member: (ident))))))))
+
+
+===================================================================================================
 Real examples
 ===================================================================================================
 
