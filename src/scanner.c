@@ -206,10 +206,6 @@ static bool scan_ident(TSLexer *lexer, char* buffer, int buffer_size) {
         lexer->advance(lexer, false);
     }
 
-    if (i == 1 && buffer[0] == '@') {
-        return false;
-    }
-
     return true;
 }
 
