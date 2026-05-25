@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.13)
 
 project(tree-sitter-witcherscript
-        VERSION "0.14.1"
+        VERSION "0.14.2"
         DESCRIPTION "WitcherScript grammar for tree-sitter"
         HOMEPAGE_URL "https://github.com/webspam/tree-sitter-witcherscript"
         LANGUAGES C)
