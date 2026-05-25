@@ -347,3 +347,78 @@ function test() {
       (for_stmt
         cond: (literal_bool)
         body: (break_stmt)))))
+
+
+
+===================================================================================================
+For loop with comma-separated init and iter
+===================================================================================================
+
+function multi_for() {
+    for (i = 0, count = 256; i < count; i += 2, i -= 1) {}
+    for (i = 0, j = 1, k = 2; i < 10; i += 1, j -= 1, k *= 2) {}
+}
+
+---------------------------------------------------------------------------------------------------
+
+(script
+  (func_decl
+    name: (ident)
+    params: (func_params)
+    definition: (func_block
+      (for_stmt
+        init: (sequence_expression
+          (assign_op_expr
+            left: (ident)
+            op: (assign_op_direct)
+            right: (literal_int))
+          (assign_op_expr
+            left: (ident)
+            op: (assign_op_direct)
+            right: (literal_int)))
+        cond: (binary_op_expr
+          left: (ident)
+          op: (binary_op_lt)
+          right: (ident))
+        iter: (sequence_expression
+          (assign_op_expr
+            left: (ident)
+            op: (assign_op_sum)
+            right: (literal_int))
+          (assign_op_expr
+            left: (ident)
+            op: (assign_op_diff)
+            right: (literal_int)))
+        body: (func_block))
+      (for_stmt
+        init: (sequence_expression
+          (assign_op_expr
+            left: (ident)
+            op: (assign_op_direct)
+            right: (literal_int))
+          (assign_op_expr
+            left: (ident)
+            op: (assign_op_direct)
+            right: (literal_int))
+          (assign_op_expr
+            left: (ident)
+            op: (assign_op_direct)
+            right: (literal_int)))
+        cond: (binary_op_expr
+          left: (ident)
+          op: (binary_op_lt)
+          right: (literal_int))
+        iter: (sequence_expression
+          (assign_op_expr
+            left: (ident)
+            op: (assign_op_sum)
+            right: (literal_int))
+          (assign_op_expr
+            left: (ident)
+            op: (assign_op_diff)
+            right: (literal_int))
+          (assign_op_expr
+            left: (ident)
+            op: (assign_op_mult)
+            right: (literal_int)))
+        body: (func_block)))))

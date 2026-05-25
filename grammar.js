@@ -435,12 +435,14 @@ module.exports = grammar({
 
     for_stmt: $ => seq(
       'for', '(',
-      field('init', optional($._expr)), ';',
+      field('init', optional(choice($._expr, $.sequence_expression))), ';',
       field('cond', optional($._expr)), ';',
-      field('iter', optional($._expr)),
+      field('iter', optional(choice($._expr, $.sequence_expression))),
       ')',
       field('body', $._func_stmt)
     ),
+
+    sequence_expression: $ => prec.right(comma1($._expr)),
 
     while_stmt: $ => seq(
       'while', '(', field('cond', $._expr), ')',
