@@ -43,21 +43,25 @@ jobs:
 
       - name: Create Draft Release
         run: |
-          RELEASE_TITLE="${{ inputs.title }}"
-          if [ -z "$RELEASE_TITLE" ]; then RELEASE_TITLE="${{ inputs.tag }}"; fi
+          RELEASE_TITLE="$INPUT_TITLE"
+          if [ -z "$RELEASE_TITLE" ]; then RELEASE_TITLE="$INPUT_TAG"; fi
 
           RELEASE_ARGS=()
-          if [ "${{ inputs.prerelease }}" = "true" ]; then RELEASE_ARGS+=("--prerelease"); fi
+          if [ "$INPUT_PRERELEASE" = "true" ]; then RELEASE_ARGS+=("--prerelease"); fi
 
-          if [ -n "${{ inputs.summary }}" ]; then
-            printf '%s' "${{ inputs.summary }}" > summary.md
+          if [ -n "$INPUT_SUMMARY" ]; then
+            printf '%s' "$INPUT_SUMMARY" > summary.md
             RELEASE_ARGS+=("--notes-file" "summary.md")
           fi
 
-          gh release create "${{ inputs.tag }}" \
+          gh release create "$INPUT_TAG" \
             --title "$RELEASE_TITLE" \
             --draft \
             "${RELEASE_ARGS[@]}" \
             --generate-notes
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          INPUT_TAG: ${{ inputs.tag }}
+          INPUT_TITLE: ${{ inputs.title }}
+          INPUT_SUMMARY: ${{ inputs.summary }}
+          INPUT_PRERELEASE: ${{ inputs.prerelease }}
