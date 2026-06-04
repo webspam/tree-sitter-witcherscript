@@ -105,7 +105,6 @@ module.exports = grammar({
   ],
 
   conflicts: $ => [
-    [$._expr, $._paren_ident], // nested expr
   ],
 
   rules: {
@@ -660,7 +659,9 @@ module.exports = grammar({
 
 
     cast_expr: $ => prec.dynamic(1, prec.right(PREC.CAST, seq(
-      field('type', $._paren_ident),
+      '(',
+      field('type', $.ident),
+      ')',
       field('value', $._expr),
     ))),
 
