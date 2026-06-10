@@ -1423,7 +1423,22 @@
     }
   },
   {
-    "type": "enum_decl_variant",
+    "type": "enum_def",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "enum_member_decl",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "enum_member_decl",
     "named": true,
     "fields": {
       "name": {
@@ -1450,21 +1465,6 @@
           }
         ]
       }
-    }
-  },
-  {
-    "type": "enum_def",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "enum_decl_variant",
-          "named": true
-        }
-      ]
     }
   },
   {

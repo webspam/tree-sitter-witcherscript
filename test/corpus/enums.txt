@@ -15,13 +15,13 @@ enum SomeEnum {
   (enum_decl
     name: (ident)
     definition: (enum_def
-      (enum_decl_variant
+      (enum_member_decl
         name: (ident))
-      (enum_decl_variant
+      (enum_member_decl
         name: (ident)
         value: (literal_int))
-      (enum_decl_variant
+      (enum_member_decl
         name: (ident))
-      (enum_decl_variant
+      (enum_member_decl
         name: (ident)
         value: (literal_hex)))))
