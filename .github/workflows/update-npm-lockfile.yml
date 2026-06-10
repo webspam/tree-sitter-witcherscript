@@ -33,7 +33,7 @@ jobs:
           node-version: 24
 
       - name: Generate package-lock.json
-        run: npm install --package-lock-only
+        run: npm install --package-lock-only --ignore-scripts
 
       - name: Commit package-lock.json if it changed
         uses: EndBug/add-and-commit@0a145b91207725ab63102736ff2ddcf18f90cdb5 # v10.0.0
