@@ -3,10 +3,6 @@ name: Create Release
 on:
   workflow_dispatch:
     inputs:
-      tag:
-        description: "Tag (e.g., v1.0.0)"
-        required: true
-        type: string
       title:
         description: "Title (defaults to tag)"
         required: false
@@ -37,6 +33,12 @@ jobs:
 
       - run: npm ci
 
+      - name: Read version from tree-sitter.json
+        id: version
+        run: |
+          VERSION=$(node -p "require('./tree-sitter.json').metadata.version")
+          echo "tag=v$VERSION" >> "$GITHUB_OUTPUT"
+
       - name: Generate
         run: npm run generate
 
@@ -63,7 +65,7 @@ jobs:
             --generate-notes
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          INPUT_TAG: ${{ inputs.tag }}
+          INPUT_TAG: ${{ steps.version.outputs.tag }}
           INPUT_TITLE: ${{ inputs.title }}
           INPUT_SUMMARY: ${{ inputs.summary }}
           INPUT_PRERELEASE: ${{ inputs.prerelease }}
