@@ -36,7 +36,7 @@ const PREC = {
 
 module.exports = grammar({
   name: 'witcherscript',
-  
+
   extras: $ => [
     /\s/,
     $.comment,
@@ -56,7 +56,7 @@ module.exports = grammar({
     'class',
     'cleanup',
     'const',
-    'continue', 
+    'continue',
     'default',
     'defaults',
     'delete',
@@ -110,7 +110,7 @@ module.exports = grammar({
   rules: {
 
     // TOP LEVEL RULE ===============================================
-    
+
     script: $ => repeat(choice(
       $.func_decl,
       $.class_decl,
@@ -120,11 +120,11 @@ module.exports = grammar({
       $.member_var_decl, // needed for @addField annotation
       $.nop
     )),
-    
-    
+
+
     // STATEMENTS ===================================================
 
-    
+
     // ENUM DECLARATION ====================
 
     enum_decl: $ => seq(
@@ -153,14 +153,14 @@ module.exports = grammar({
     ),
 
     _enum_member_decl_assign: $ => seq(
-      '=', 
+      '=',
       field('value', choice(
         $.literal_int,
         $.literal_hex
       ))
     ),
 
-  
+
     // STRUCT DECLARATION ==================
 
     struct_decl: $ => seq(
@@ -345,7 +345,7 @@ module.exports = grammar({
       'function', field('name', $.ident),
     ),
 
-    
+
     _func_definition: $ => choice(
       $.func_block,
       $.nop
@@ -353,7 +353,7 @@ module.exports = grammar({
 
     func_params: $ => seq(
       '(', comma($.func_param_group), ')'
-    ), 
+    ),
 
     func_param_group: $ => seq(
       field('specifiers', repeat($.specifier)),
@@ -487,7 +487,7 @@ module.exports = grammar({
       'default', ':',
     ),
 
-    
+
     break_stmt: $ => seq(
       'break', ';'
     ),
@@ -512,7 +512,7 @@ module.exports = grammar({
       $._expr, ';'
     ),
 
-    
+
     nop: $ => ';',
 
     type_annot: $ => seq(
@@ -525,7 +525,7 @@ module.exports = grammar({
     ),
 
 
-  
+
     // EXPRESSIONS ==================================================
 
     _expr: $ => choice(
@@ -627,7 +627,7 @@ module.exports = grammar({
     binary_op_mod: $ => '%',
     binary_op_div: $ => '/',
     binary_op_mult: $ => '*',
-    
+
 
     new_expr: $ => prec.right(PREC.NEW, seq(
       $._new_expr_intro,
@@ -802,7 +802,7 @@ module.exports = grammar({
         '/',
       ),
     )),
-  },     
+  },
 });
 
 
@@ -845,11 +845,11 @@ function comma1(rule) {
 function comma2(rule) {
   return delim2(rule, ',')
 }
-    
+
 function comma(rule) {
   return optional(comma1(rule))
 }
-    
+
 function comma_trail(rule) {
   return delim_trail(rule, del)
 }
