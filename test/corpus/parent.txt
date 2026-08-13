@@ -1,0 +1,100 @@
+===================================================================================================
+parent in class method
+===================================================================================================
+
+class C {
+    function F() {
+        parent.M();
+    }
+}
+
+---------------------------------------------------------------------------------------------------
+
+(script
+  (class_decl
+    name: (ident)
+    definition: (class_def
+      (func_decl
+        name: (ident)
+        params: (func_params)
+        definition: (func_block
+          (expr_stmt
+            (func_call_expr
+              func: (member_access_expr
+                accessor: (parent_expr)
+                member: (ident)))))))))
+
+===================================================================================================
+virtual_parent in class method
+===================================================================================================
+
+class C {
+    function F() {
+        virtual_parent.M();
+    }
+}
+
+---------------------------------------------------------------------------------------------------
+
+(script
+  (class_decl
+    name: (ident)
+    definition: (class_def
+      (func_decl
+        name: (ident)
+        params: (func_params)
+        definition: (func_block
+          (expr_stmt
+            (func_call_expr
+              func: (member_access_expr
+                accessor: (virtual_parent_expr)
+                member: (ident)))))))))
+
+===================================================================================================
+parent in free function
+===================================================================================================
+
+function F() {
+    parent.M();
+}
+
+---------------------------------------------------------------------------------------------------
+
+(script
+  (func_decl
+    name: (ident)
+    params: (func_params)
+    definition: (func_block
+      (expr_stmt
+        (func_call_expr
+          func: (member_access_expr
+            accessor: (parent_expr)
+            member: (ident)))))))
+
+===================================================================================================
+parent in struct method
+===================================================================================================
+
+struct S {
+    function F() {
+        parent.M();
+    }
+}
+
+---------------------------------------------------------------------------------------------------
+
+    (script
+      (struct_decl
+        (ident)
+        (struct_def
+          (MISSING "}")))
+      (func_decl
+        (ident)
+        (func_params)
+        (func_block
+          (expr_stmt
+            (func_call_expr
+              (member_access_expr
+                (parent_expr)
+                (ident))))))
+      (ERROR))

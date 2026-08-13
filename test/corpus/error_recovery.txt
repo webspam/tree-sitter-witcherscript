@@ -41,3 +41,59 @@ function test() {
         (member_access_expr
           (incomplete_member_access_expr
             accessor: (ident)))))))
+
+
+===================================================================================================
+Incomplete member access followed by statement - valid as single statement
+===================================================================================================
+
+function test() {
+    obj.
+    obj.meth(param);
+}
+
+---------------------------------------------------------------------------------------------------
+
+(script
+  (func_decl
+    name: (ident)
+    params: (func_params)
+    definition: (func_block
+      (expr_stmt
+        (func_call_expr
+          func: (member_access_expr
+            accessor: (member_access_expr
+              accessor: (ident)
+              member: (ident))
+            member: (ident))
+          args: (func_call_args
+            (ident)))))))
+
+
+===================================================================================================
+Incomplete member access followed by statement - missing semicolon
+===================================================================================================
+
+function test() {
+    obj.me
+    obj.meth(param);
+}
+
+---------------------------------------------------------------------------------------------------
+
+(script
+  (func_decl
+    name: (ident)
+    params: (func_params)
+    definition: (func_block
+      (expr_stmt
+        (func_call_expr
+          func: (member_access_expr
+            accessor: (member_access_expr
+              accessor: (ident)
+              member: (ident))
+            (ERROR
+              (ident))
+            member: (ident))
+          args: (func_call_args
+            (ident)))))))
