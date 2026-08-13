@@ -134,14 +134,14 @@ class Foo {}
 
 ---------------------------------------------------------------------------------------------------
 
-    (script
-      (ERROR
-        (annotation
-          (annotation_ident)
-          (ident)))
-      (class_decl
-        (ident)
-        (class_def)))
+(script
+  (ERROR
+    (annotation
+      name: (annotation_ident)
+      arg: (ident)))
+  (class_decl
+    name: (ident)
+    definition: (class_def)))
 
 ===================================================================================================
 stray annotation then comment then class
@@ -153,15 +153,15 @@ class Foo {}
 
 ---------------------------------------------------------------------------------------------------
 
-    (script
-      (ERROR
-        (annotation
-          (annotation_ident)
-          (ident)))
-      (comment)
-      (class_decl
-        (ident)
-        (class_def)))
+(script
+  (ERROR
+    (annotation
+      name: (annotation_ident)
+      arg: (ident)))
+  (comment)
+  (class_decl
+    name: (ident)
+    definition: (class_def)))
 
 ===================================================================================================
 errored annotation then annotated function
@@ -170,20 +170,21 @@ errored annotation then annotated function
 @addField(CPlayer)
 @addMethod(CPlayer)
 function Foo() {}
+
 ---------------------------------------------------------------------------------------------------
 
-    (script
-      (ERROR
-        (annotation
-          (annotation_ident)
-          (ident)))
-      (func_decl
-        (annotation
-          (annotation_ident)
-          (ident))
-        (ident)
-        (func_params)
-        (func_block)))
+(script
+  (ERROR
+    (annotation
+      name: (annotation_ident)
+      arg: (ident)))
+  (func_decl
+    annotation: (annotation
+      name: (annotation_ident)
+      arg: (ident))
+    name: (ident)
+    params: (func_params)
+    definition: (func_block)))
 
 ===================================================================================================
 well-formed annotated member
@@ -194,11 +195,11 @@ var x : int;
 
 ---------------------------------------------------------------------------------------------------
 
-    (script
-      (member_var_decl
-        (annotation
-          (annotation_ident)
-          (ident))
-        (ident)
-        (type_annot
-          (ident))))
+(script
+  (member_var_decl
+    annotation: (annotation
+      name: (annotation_ident)
+      arg: (ident))
+    names: (ident)
+    var_type: (type_annot
+      type_name: (ident))))
