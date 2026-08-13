@@ -622,11 +622,6 @@
     }
   },
   {
-    "type": "autobind_single",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "binary_op_diff",
     "named": true,
     "fields": {}
@@ -2736,11 +2731,6 @@
     "fields": {}
   },
   {
-    "type": "literal_null",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "local_var_decl_stmt",
     "named": true,
     "fields": {
@@ -3534,11 +3524,6 @@
     "fields": {}
   },
   {
-    "type": "parent_expr",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "return_stmt",
     "named": true,
     "fields": {},
@@ -3911,11 +3896,6 @@
         }
       ]
     }
-  },
-  {
-    "type": "super_expr",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "switch_block",
@@ -4512,11 +4492,6 @@
     }
   },
   {
-    "type": "this_expr",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "type_annot",
     "named": true,
     "fields": {
@@ -4675,11 +4650,6 @@
   },
   {
     "type": "unary_op_plus",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "virtual_parent_expr",
     "named": true,
     "fields": {}
   },
@@ -4894,10 +4864,6 @@
     "named": false
   },
   {
-    "type": "NULL",
-    "named": false
-  },
-  {
     "type": "[",
     "named": false
   },
@@ -4940,6 +4906,10 @@
   {
     "type": "autobind",
     "named": false
+  },
+  {
+    "type": "autobind_single",
+    "named": true
   },
   {
     "type": "binary_op_and",
@@ -5123,6 +5093,10 @@
     "named": true
   },
   {
+    "type": "literal_null",
+    "named": true
+  },
+  {
     "type": "literal_string",
     "named": true
   },
@@ -5139,8 +5113,8 @@
     "named": false
   },
   {
-    "type": "parent",
-    "named": false
+    "type": "parent_expr",
+    "named": true
   },
   {
     "type": "private",
@@ -5171,10 +5145,6 @@
     "named": false
   },
   {
-    "type": "single",
-    "named": false
-  },
-  {
     "type": "state",
     "named": false
   },
@@ -5191,16 +5161,16 @@
     "named": false
   },
   {
-    "type": "super",
-    "named": false
+    "type": "super_expr",
+    "named": true
   },
   {
     "type": "switch",
     "named": false
   },
   {
-    "type": "this",
-    "named": false
+    "type": "this_expr",
+    "named": true
   },
   {
     "type": "timer",
@@ -5223,8 +5193,8 @@
     "named": false
   },
   {
-    "type": "virtual_parent",
-    "named": false
+    "type": "virtual_parent_expr",
+    "named": true
   },
   {
     "type": "while",

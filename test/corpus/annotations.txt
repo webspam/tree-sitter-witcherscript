@@ -3,26 +3,26 @@ Annotations
 ===================================================================================================
 
 
-@wrapMethod(CPlayer) 
+@wrapMethod(CPlayer)
 function CheatGod2(on : bool)
 {
 	wrappedMethod(on); // this will call the original CheatGod2
 	thePlayer.AddMoney(300);
 }
 
-@addMethod(CPlayer) 
+@addMethod(CPlayer)
 public function scriptextAdd()
 {
 	dummy = 12345;
 }
 
-@replaceMethod(CPlayer) 
+@replaceMethod(CPlayer)
 function CheatGod2(on : bool)
 {
 	thePlayer.AddMoney(2000);
 }
 
-@replaceMethod 
+@replaceMethod
 function klapaucius()
 {
     thePlayer.AddMoney(1000);
@@ -123,3 +123,82 @@ Bare @ (incomplete annotation — LSP trigger)
 (script
   (ERROR
     (annotation_ident)))
+
+===================================================================================================
+stray annotation before class
+===================================================================================================
+
+@addField(CPlayer)
+
+class Foo {}
+
+---------------------------------------------------------------------------------------------------
+
+    (script
+      (ERROR
+        (annotation
+          (annotation_ident)
+          (ident)))
+      (class_decl
+        (ident)
+        (class_def)))
+
+===================================================================================================
+stray annotation then comment then class
+===================================================================================================
+
+@addField(CPlayer)
+// note
+class Foo {}
+
+---------------------------------------------------------------------------------------------------
+
+    (script
+      (ERROR
+        (annotation
+          (annotation_ident)
+          (ident)))
+      (comment)
+      (class_decl
+        (ident)
+        (class_def)))
+
+===================================================================================================
+errored annotation then annotated function
+===================================================================================================
+
+@addField(CPlayer)
+@addMethod(CPlayer)
+function Foo() {}
+---------------------------------------------------------------------------------------------------
+
+    (script
+      (ERROR
+        (annotation
+          (annotation_ident)
+          (ident)))
+      (func_decl
+        (annotation
+          (annotation_ident)
+          (ident))
+        (ident)
+        (func_params)
+        (func_block)))
+
+===================================================================================================
+well-formed annotated member
+===================================================================================================
+
+@addField(CPlayer)
+var x : int;
+
+---------------------------------------------------------------------------------------------------
+
+    (script
+      (member_var_decl
+        (annotation
+          (annotation_ident)
+          (ident))
+        (ident)
+        (type_annot
+          (ident))))
