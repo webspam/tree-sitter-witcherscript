@@ -17,7 +17,7 @@
 
 
 #include "tree_sitter/parser.h"
-#include <ctype.h>
+#include <wctype.h>
 #include <string.h>
 
 // #define DEBUG
@@ -186,11 +186,11 @@ static bool scan_ident(TSLexer *lexer, char* buffer, int buffer_size) {
     }
 
     // skip leading whitespace
-    while (isspace(lexer->lookahead)) {
+    while (iswspace(lexer->lookahead)) {
         lexer->advance(lexer, true);
     }
 
-    if (lexer->eof(lexer) || !(isalpha(lexer->lookahead) || lexer->lookahead == '_' || lexer->lookahead == '@')) {
+    if (lexer->eof(lexer) || !(iswalpha(lexer->lookahead) || lexer->lookahead == '_' || lexer->lookahead == '@')) {
         return false;
     }
 
@@ -199,7 +199,7 @@ static bool scan_ident(TSLexer *lexer, char* buffer, int buffer_size) {
     lexer->advance(lexer, false);
 
     for (i = 1; i < buffer_size; i++) {
-        if (lexer->eof(lexer) || !(isalnum(lexer->lookahead) || lexer->lookahead == '_')) {
+        if (lexer->eof(lexer) || !(iswalnum(lexer->lookahead) || lexer->lookahead == '_')) {
             break;
         }
         buffer[i] = (char)lexer->lookahead;
