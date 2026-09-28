@@ -41972,7 +41972,7 @@ TS_PUBLIC const TSLanguage *tree_sitter_witcherscript(void) {
     .max_reserved_word_set_size = 0,
     .metadata = {
       .major_version = 0,
-      .minor_version = 16,
+      .minor_version = 17,
       .patch_version = 0,
     },
   };
