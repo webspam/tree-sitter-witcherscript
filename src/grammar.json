@@ -3515,6 +3515,10 @@
     },
     {
       "type": "STRING",
+      "value": "enter"
+    },
+    {
+      "type": "STRING",
       "value": "entry"
     },
     {
@@ -3572,6 +3576,10 @@
     {
       "type": "STRING",
       "value": "latent"
+    },
+    {
+      "type": "STRING",
+      "value": "local"
     },
     {
       "type": "STRING",
