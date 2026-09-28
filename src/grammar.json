@@ -3559,15 +3559,15 @@
     },
     {
       "type": "STRING",
+      "value": "import"
+    },
+    {
+      "type": "STRING",
       "value": "in"
     },
     {
       "type": "STRING",
       "value": "inlined"
-    },
-    {
-      "type": "STRING",
-      "value": "import"
     },
     {
       "type": "STRING",
