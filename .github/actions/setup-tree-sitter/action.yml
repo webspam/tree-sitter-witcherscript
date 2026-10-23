@@ -1,0 +1,20 @@
+name: Setup tree-sitter CLI
+description: Install a pinned, checksum-verified tree-sitter CLI from GitHub releases
+
+runs:
+  using: composite
+  steps:
+    - name: Install tree-sitter CLI
+      shell: bash
+      env:
+        GH_TOKEN: ${{ github.token }}
+        TREE_SITTER_VERSION: 0.26.9
+        TREE_SITTER_SHA256: 9ce82137caa65864e7ca8b869fd391cef88c9bd2a01c4371b9c4dd26c2585efb
+      run: |
+        install_dir="$RUNNER_TEMP/tree-sitter"
+        asset="tree-sitter-linux-x64.gz"
+        gh release download "v$TREE_SITTER_VERSION" -R tree-sitter/tree-sitter -p "$asset" -D "$install_dir"
+        echo "$TREE_SITTER_SHA256  $install_dir/$asset" | sha256sum -c -
+        gunzip -c "$install_dir/$asset" > "$install_dir/tree-sitter"
+        chmod +x "$install_dir/tree-sitter"
+        echo "$install_dir" >> "$GITHUB_PATH"
